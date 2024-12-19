@@ -24,16 +24,20 @@ public class Publication {
 	// Set due date to 14 days from now
 	public void checkOut(String patron) {
 		
+		loanedTo = patron;
+		dueDate = LocalDate.now();
+		dueDate = dueDate.plusDays(14);
 	}
 	
 	public void checkIn() {
-		
+		loanedTo = null;
+		dueDate = null;
 	}
 	
 	@Override
 	public String toString() {
 		
-		return "";
+		return title + " by " + author + ", " + copyright + "\nLoaned to " + loanedTo + " until " + dueDate;
 	}
 	
 	private String title;
