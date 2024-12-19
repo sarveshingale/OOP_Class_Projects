@@ -15,7 +15,11 @@ public class LibraryManager {
 		System.out.println("\n\nWhich book would you like to check out (Provide index): ");
 		Scanner sc = new Scanner(System.in);
 		int index = sc.nextInt();
+		sc.nextLine();
 		System.out.println("Who are you? ");
-		System.out.println(library);		
+		String patron = sc.nextLine();
+		library.checkOut(index, patron);
+		System.out.println(library);	
+		sc.close();
 	}
 }

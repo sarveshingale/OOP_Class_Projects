@@ -27,7 +27,7 @@ public class Library {
 		String result = name + "\n\n";
 		int index = 0;
 		for(Publication publication : publications) {
-			String line = index + ") " + publication;
+			String line = index + ") " + publication + "\n";
 			result = result + line;
 			index++;
 		}

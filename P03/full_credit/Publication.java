@@ -37,7 +37,11 @@ public class Publication {
 	@Override
 	public String toString() {
 		
-		return title + " by " + author + ", " + copyright + "\nLoaned to " + loanedTo + " until " + dueDate;
+		String result = title + " by " + author + ", " + copyright;
+		if(dueDate != null) {
+			result = result + "\nLoaned to " + loanedTo + " until " + dueDate;
+		}
+		return result;
 	}
 	
 	private String title;
