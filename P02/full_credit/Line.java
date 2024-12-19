@@ -1,6 +1,7 @@
 
 public class Line {
 
+    // Constructor
     public Line(double x1, double y1, double x2, double y2, Color color) {
 
         this.x1 = x1;
@@ -10,6 +11,17 @@ public class Line {
         this.color = color;        
     }
 
+    // Line length
+    public double length() {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    // Line toString()
+    @Override
+    public String toString() {
+        String text = String.format("%-10s (%.3f, %.3f) - (%.3f, %.3f) ", color, x1, y1, x2, y2);
+        return text;
+    }
 
     private double x1;
     private double x2;
