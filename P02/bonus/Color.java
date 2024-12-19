@@ -9,8 +9,15 @@ public enum Color {
 	
 	@Override
 	public String toString() {
-		return name() + " (0x" + String.format("%x", rgb) + ")";
+		// Extracting individual color components for ANSI escape sequence
+		int red = (rgb >> 16) & 0xff;
+		int green = (rgb >> 8) & 0xff;
+		int blue = rgb & 0xff;
+		String escapeSequence = String.format("\033[38;2;%d;%d;%dm", red, green, blue);
+		return name() + escapeSequence + " (0x" + String.format("%X", rgb) + ")" + "\033[0m";
 	}
+	
+	
 	
 	private int rgb;
 		
