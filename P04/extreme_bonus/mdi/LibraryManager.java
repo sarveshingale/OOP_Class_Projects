@@ -6,7 +6,8 @@ import java.io.IOException;
 import library.Publication;
 import library.Patron;
 import library.Library;
-
+import library.Video;
+import library.Video.InvalidRuntimeException;
 public class LibraryManager {
 	
 	private final static String pubFile = "Publication.txt";
@@ -24,21 +25,42 @@ public class LibraryManager {
 				String strLine = line;
 				String[] lines;
 				lines = strLine.split(",");
-				if(lines.length != 3) {
+				if((lines.length != 3) && (lines.length !=4)) {
 					System.err.println("Lines in publication file formatted incorrectly");
 					continue;
 				}
 				
-				// Constructing Publication Object	
-				try {
-					String title = lines[0].trim();
-					String author = lines[1].trim();
-					int copyright = Integer.parseInt(lines[2].trim());
-					library.addPublication(new Publication(title, author, copyright));
+				// Constructing Publication Object
+				if(lines.length == 3) {
+					try {
+						String title = lines[0].trim();
+						String author = lines[1].trim();
+						int copyright = Integer.parseInt(lines[2].trim());
+						library.addPublication(new Publication(title, author, copyright));
+					}
+					catch(IllegalArgumentException e) {
+						System.err.println(e.getMessage());
+						continue;
+					}
 				}
-				catch(IllegalArgumentException e) {
-					System.err.println(e.getMessage());
-					continue;
+				// Constructing Video Object
+				else if(lines.length == 4) {
+					try {
+						String title = lines[0].trim();
+						String author = lines[1].trim();
+						int copyright = Integer.parseInt(lines[2].trim());
+						int runtime = Integer.parseInt(lines[3].trim());
+						try {
+							library.addPublication(new Video(title, author, copyright, runtime));
+						}
+						catch(InvalidRuntimeException e) {
+							System.err.println(e.getMessage());
+						}
+					}
+					catch(IllegalArgumentException e) {
+						System.err.println(e.getMessage());
+						continue;
+					}
 				}
 				
 			}
@@ -56,7 +78,7 @@ public class LibraryManager {
 				String[] lines;
 				lines = strLine.split(",");
 				if(lines.length != 2) {
-					System.err.println("Lines in publication file formatted incorrectly");
+					System.err.println("Lines in Patrons file formatted incorrectly");
 					continue;
 				}
 				
