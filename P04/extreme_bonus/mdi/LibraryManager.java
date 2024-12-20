@@ -3,6 +3,10 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import library.Publication;
+import library.Patron;
+import library.Library;
+
 public class LibraryManager {
 	
 	private final static String pubFile = "Publication.txt";
@@ -13,7 +17,7 @@ public class LibraryManager {
 		Library library = new Library("UTA Central Library");
 		
 		// Populating publications from file
-		try(BufferedReader publicationFile = new BufferedReader(new FileReader("Publications.txt"))) {
+		try(BufferedReader publicationFile = new BufferedReader(new FileReader("mdi/Publications.txt"))) {
 			String line;
 			while((line = publicationFile.readLine()) != null) {
 				
@@ -44,7 +48,7 @@ public class LibraryManager {
 		}
 		
 		// Populating Patrons from file		
-		try(BufferedReader patronFile = new BufferedReader(new FileReader("Patrons.txt"))) {
+		try(BufferedReader patronFile = new BufferedReader(new FileReader("mdi/Patrons.txt"))) {
 			String line;
 			while((line = patronFile.readLine()) != null) {
 				
