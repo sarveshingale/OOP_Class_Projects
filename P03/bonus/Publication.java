@@ -22,7 +22,7 @@ public class Publication {
 	}
 	
 	// Set due date to 14 days from now
-	public void checkOut(String patron) {
+	public void checkOut(Patron patron) {
 		
 		loanedTo = patron;
 		dueDate = LocalDate.now();
@@ -47,7 +47,7 @@ public class Publication {
 	private String title;
 	private String author;
 	private int copyright; // This is year
-	private String loanedTo; // Name of person who borrowed book or null
+	private Patron loanedTo; // Name of person who borrowed book or null
 	private LocalDate dueDate; // Will be set in method checkout()
 	
 }

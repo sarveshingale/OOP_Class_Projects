@@ -11,8 +11,26 @@ public class Library {
 		publications.add(publication);
 	}
 	
-	public void checkOut(int publicationIndex, String patron) {
+	public void addPatron(Patron patron) {
+		
+		patrons.add(patron);
+	}
+	
+	public String patronMenu() {
+		
+		String result = "Patrons \n\n";
+		int index = 0;
+		for(Patron patron : patrons) {
+			String line = index + ") " + patron + "\n";
+			result = result + line;
+			index++;
+		}
+		return result;
+	}
+	
+	public void checkOut(int publicationIndex, int patronIndex) {
 		try {
+			Patron patron = patrons.get(patronIndex);
 			Publication publication = publications.get(publicationIndex);
 			publication.checkOut(patron);
 		}
@@ -37,4 +55,5 @@ public class Library {
 	
 	private String name;
 	private ArrayList<Publication> publications = new ArrayList<Publication>();
+	private ArrayList<Patron> patrons = new ArrayList<Patron>();
 }
