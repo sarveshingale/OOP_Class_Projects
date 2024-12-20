@@ -8,3 +8,11 @@ Harry Potter and the Deathly Hallows,JK Rowling,2010
 Geronimo Stilton,Mouse,2014
 Lord of the Rings,R.R Tolken,2002
 The Hobbit,R.R Tolken,2015
+My visit at the Zoo,Snowy,2019,120
+Jungle Safari Adventures,Emily Carter,2021,95
+Underwater Mysteries,David Reynolds,2020,110
+The Great Bird Migration,Sarah Watson,2018,80
+Life on the Savannah,Mark Thompson,2022,135
+Penguins in the Arctic,Lisa Chen,2019,90
+Reptiles and Amphibians,Roger Adams,2020,105
+The Wonders of Wildlife,Anna Smith,2023,140

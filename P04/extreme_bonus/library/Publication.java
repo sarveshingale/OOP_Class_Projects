@@ -35,13 +35,18 @@ public class Publication {
 		dueDate = null;
 	}
 	
-	@Override
-	public String toString() {
-		
-		String result = title + " by " + author + ", " + copyright;
+	protected String toStringBuilder(String pre, String mid) {
+		String result = pre + " " + title + " by " + author + ", " + copyright + " " + mid;
 		if(dueDate != null) {
 			result = result + "\nLoaned to " + loanedTo + " until " + dueDate;
 		}
+		return result;
+	}
+	
+	@Override
+	public String toString() {
+		
+		String result = toStringBuilder("Book", "");
 		return result;
 	}
 	
