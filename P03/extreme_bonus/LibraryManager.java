@@ -11,7 +11,8 @@ public class LibraryManager {
 		
 		Library library = new Library("UTA Central Library");
 		
-		try(BufferedReader publicationFile = new BufferedReader(new FileReader("Publication.txt"))) {
+		// Populating publications from file
+		try(BufferedReader publicationFile = new BufferedReader(new FileReader("Publications.txt"))) {
 			String line;
 			while((line = publicationFile.readLine()) != null) {
 				
@@ -41,25 +42,36 @@ public class LibraryManager {
 			System.err.println(e.getMessage());
 		}
 		
+		// Populating Patrons from file		
+		try(BufferedReader patronFile = new BufferedReader(new FileReader("Patrons.txt"))) {
+			String line;
+			while((line = patronFile.readLine()) != null) {
 				
+				String strLine = line;
+				String[] lines;
+				lines = strLine.split(",");
+				if(lines.length != 2) {
+					System.err.println("Lines in publication file formatted incorrectly");
+					continue;
+				}
 				
-		//BufferedReader patronFile = new BufferedReader(new FileReader("Patron.txt"));
+				// Constructing Publication Object	
+				try {
+					String name = lines[0].trim();
+					String email = lines[1].trim();
+					library.addPatron(new Patron(name, email));
+				}
+				catch(IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					continue;
+				}
+				
+			}
+		}
+		catch(IOException e) {
+			System.err.println(e.getMessage());
+		}
 		
-		// Adding publications
-		Publication book1 = new Publication("Harry Potter", "JK Rowling", 2001);
-		library.addPublication(book1);
-		Publication book2 = new Publication("Geronimo Stilton", "Mouse", 2014);
-		library.addPublication(book2);
-		Publication book3 = new Publication("Lord of the Rings", "R.R Tolken", 2002);
-		library.addPublication(book3);
-		
-		// Adding patrons
-		Patron patron1  = new Patron("John Corn", "johncorn@flux.com");
-		library.addPatron(patron1);
-		Patron patron2 = new Patron("Jelly Felly", "jellyfelly@flux.com");
-		library.addPatron(patron2);
-		Patron patron3 = new Patron("Stall Mall", "stallmall@flux.com");
-		library.addPatron(patron3);
 		
 		System.out.println(library);
 		System.out.println("\n\nWhich book would you like to check out (Provide index): ");
