@@ -1,22 +1,57 @@
 package library;
 import java.util.ArrayList;
 
+/**
+ * This class models a library.
+ * @author Sarvesh Ingale
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Library {
 	
+	/**
+	 * Constructor for class Library
+	 *
+	 * @version 1.0
+	 * @param Name of the Library
+	 * @since 1.0
+	 */
 	public Library(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Adds a publication to the Library
+	 *
+	 * @param An Publication object
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	public void addPublication(Publication publication) {
 		
 		publications.add(publication);
 	}
 	
+	/**
+	 * Adds a Patron to the Library
+	 *
+	 * @param A Patron Object
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	public void addPatron(Patron patron) {
 		
 		patrons.add(patron);
 	}
 	
+	/**
+	 * Constructs a menu of all Patrons
+	 *
+	 * @return String containing the constructed menu
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	public String patronMenu() {
 		
 		String result = "Patrons \n\n";
@@ -29,6 +64,16 @@ public class Library {
 		return result;
 	}
 	
+	/**
+	 * Checks out a Publication
+	 *
+	 * The checkOut in publication actually changes 
+	 * the fields and is called here
+	 *
+	 * @param publicationIndex The index of the publication as shown in the toString()
+	 * @version 1.0
+	 * @since 1.0
+	 */
 	public void checkOut(int publicationIndex, int patronIndex) {
 		try {
 			Patron patron = patrons.get(patronIndex);
@@ -40,6 +85,12 @@ public class Library {
 		}
 	}
 	
+	/**
+	 * Overriden toString method to return menu of publications
+	 *
+	 * @return A menu of all publications
+	 * @version 1.0
+	 */
 	@Override
 	public String toString() {
 		
