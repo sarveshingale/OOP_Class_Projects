@@ -1,6 +1,7 @@
 package library;
 import java.util.ArrayList;
-
+import java.io.BufferedWriter;
+import java.io.IOException;
 /**
  * This class models a library.
  * @author Sarvesh Ingale
@@ -96,6 +97,27 @@ public class Library {
 		Publication publication = publications.get(publicationIndex);
 		publication.checkIn();
 	}
+	
+	/** Saves the Library data to a file
+	 *
+	 * @param publicationWriter writing to publication file
+	 * @param patronWriter writing to patron file
+	 * @version 1.0
+	 */
+	 public void save(BufferedWriter publicationWriter, BufferedWriter patronWriter) throws IOException {
+		
+		for(Publication publication : publications) {
+			publication.save(publicationWriter);
+			publicationWriter.newLine();
+		}
+		
+		for(Patron patron : patrons) {
+			patron.save(patronWriter);
+			patronWriter.newLine();
+		}
+	
+	 }
+	 
 	/**
 	 * Overriden toString method to return menu of publications
 	 *

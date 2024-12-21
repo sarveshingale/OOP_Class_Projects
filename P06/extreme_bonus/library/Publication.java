@@ -1,6 +1,7 @@
 package library;
 import java.time.LocalDate;
-
+import java.io.BufferedWriter;
+import java.io.IOException;
 /**
  * This class models a Publication
  *
@@ -60,6 +61,25 @@ public class Publication {
 		loanedTo = null;
 		dueDate = null;
 	}
+	
+	/** Saves the publication data to a file
+	 *
+	 * @param bw BufferedWriter to write to file
+	 * @version 1.0
+	 */
+	 public void save(BufferedWriter bw) throws IOException {
+		
+		String writeData = title + "," + author + "," + copyright + ",";
+		if(loanedTo == null) {
+			writeData = writeData + "null" + "null" + "," + "null"; 
+		}
+		else {
+			loanedTo.save(bw);
+			writeData = writeData + "," + dueDate;
+			bw.write(writeData);
+		}
+	
+	 }
 	
 	/**
 	 * Construct toString for Publication and its subclasses

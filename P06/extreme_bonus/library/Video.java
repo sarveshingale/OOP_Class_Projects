@@ -1,6 +1,7 @@
 package library;
 import java.time.Duration;
-
+import java.io.BufferedWriter;
+import java.io.IOException;
 /**
  * This class models a Video
  *
@@ -44,6 +45,18 @@ public class Video extends Publication {
 		this.runtime = Duration.ofMinutes(runtime);
 	}
 	
+	/** Saves the publication data to a file
+	 *
+	 * @param bw BufferedWriter to write to file
+	 * @version 1.0
+	 */
+	 public void save(BufferedWriter bw) throws IOException {	
+		super.save(bw);
+		String writeData = "," + runtime.toMinutes();
+		bw.write(writeData);
+	
+	 }
+	 
 	/**
 	 * Overriden toString method that calls on toStringBuilder
 	 *

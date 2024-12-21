@@ -1,8 +1,10 @@
 package mdi;
 import java.util.Scanner;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.BufferedWriter;
 import library.Publication;
 import library.Patron;
 import library.Library;
@@ -16,16 +18,6 @@ public class LibraryManager {
 	public static void main(String[] args) {
 		
 		Library library = new Library(libraryName);
-		System.out.println(libraryName + "\n\n");
-		System.out.println("=========\nMain Menu\n=========\n\n");
-		
-		System.out.println("Publications");
-		System.out.println("1) List\n" + "2) Add\n" + "3) Check out\n" + "4) Check in\n");
-		System.out.println("Patrons");
-		System.out.println("5) List\n" + "6) Add\n");
-		System.out.println("Files");
-		System.out.println("7) Load file\n" + "0) exit\n\n");
-		System.out.println("Selection: ");
 		
 		Scanner sc = new Scanner(System.in);
 		int selection = 1;
@@ -38,7 +30,7 @@ public class LibraryManager {
 			System.out.println("Patrons");
 			System.out.println("5) List\n" + "6) Add\n");
 			System.out.println("Files");
-			System.out.println("7) Load file\n" + "0) exit\n\n");
+			System.out.println("7) Load Test Data\n" + "8) Save\n" + "0) exit\n\n");
 			System.out.println("Selection: ");
 			selection = sc.nextInt();
 			sc.nextLine();
@@ -172,6 +164,25 @@ public class LibraryManager {
 					catch(IOException e) {
 						System.err.println(e.getMessage());
 					}
+				}
+				
+				case 8 -> {
+					System.out.print("Please Enter Name of file for saving publications(+ extension): ");
+					String publicationFile = sc.nextLine();
+					System.out.print("Please Enter Name of file for saving Patrons(+ extension): ");
+					String patronFile = sc.nextLine();
+					try(
+						BufferedWriter publicationWriter = new BufferedWriter(new FileWriter(publicationFile));
+						BufferedWriter patronWriter = new BufferedWriter(new FileWriter(patronFile));
+					)
+					{							
+						library.save(publicationWriter, patronWriter);
+						System.out.println("Saved Succesfully");
+					}
+					catch(IOException e) {
+						System.err.println(e.getMessage());
+					}					
+					
 				}
 				
 				case 0 -> {}
