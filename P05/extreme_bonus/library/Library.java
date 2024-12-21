@@ -94,7 +94,7 @@ public class Library {
 	public void checkIn(int publicationIndex) {
 		
 		Publication publication = publications.get(publicationIndex);
-		publication.checkin();
+		publication.checkIn();
 	}
 	/**
 	 * Overriden toString method to return menu of publications
