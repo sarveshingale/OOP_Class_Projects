@@ -1,8 +1,23 @@
 package library;
 import java.time.LocalDate;
 
+/**
+ * This class models a Publication
+ *
+ * @author Sarvesh Ingale
+ * @version 1.0
+ * @since 1.0
+ */
 public class Publication {
 	
+	/**
+	 * Instance a publication object
+	 *
+	 * @param title Title of the publication
+	 * @param author Author of the Publication
+	 * @param copyright The copyright year of the publication
+	 * @version 1.0
+	 */
 	public Publication(String title, String author, int copyright){
 		this.title = title;
 		this.author = author;
@@ -22,7 +37,13 @@ public class Publication {
 		}				
 	}
 	
-	// Set due date to 14 days from now
+	/**
+	 * Checks out a publicaton to a Patron
+	 *
+	 * @param patron The borrower for the publication
+	 * @version 1.0
+	 */
+	 // Publication is checked out for 14 days
 	public void checkOut(Patron patron) {
 		
 		loanedTo = patron;
@@ -30,11 +51,24 @@ public class Publication {
 		dueDate = dueDate.plusDays(14);
 	}
 	
+	/**
+	 * Checks in borrowed Publication
+	 *
+	 * @version 1.0
+	 */
 	public void checkIn() {
 		loanedTo = null;
 		dueDate = null;
 	}
 	
+	/**
+	 * Construct toString for Publication and its subclasses
+	 *
+	 * @param pre First part of the String
+	 * @param mid Last part of the String
+	 * @return String that has appropriate formatting
+	 * @version 1.0
+	 */
 	protected String toStringBuilder(String pre, String mid) {
 		String result = pre + " " + title + " by " + author + ", " + copyright + " " + mid;
 		if(dueDate != null) {
@@ -43,6 +77,12 @@ public class Publication {
 		return result;
 	}
 	
+	/**
+	 * Overidden toString method that formats Book Publication
+	 *
+	 * @return String that contains details of a publication
+	 * @version 1.0
+	 */
 	@Override
 	public String toString() {
 		
