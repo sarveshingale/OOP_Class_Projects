@@ -71,12 +71,14 @@ public class Publication {
 		
 		String writeData = title + "," + author + "," + copyright + ",";
 		if(loanedTo == null) {
-			writeData = writeData + "null" + "null" + "," + "null"; 
+			writeData = writeData + "null," + "null" + "," + "null"; 
+			bw.write(writeData);
 		}
 		else {
-			loanedTo.save(bw);
-			writeData = writeData + "," + dueDate;
 			bw.write(writeData);
+			loanedTo.save(bw);
+			String sdate = "," + dueDate.toString();
+			bw.write(sdate);
 		}
 	
 	 }
