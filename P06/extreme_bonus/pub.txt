@@ -1,0 +1,18 @@
+Harry Potter and the Sorcerer's Stone,JK Rownling,2001,null,null,null
+Harry Potter and the Chamber of Secrets,JK Rowling,2002,null,null,null
+Harry Potter and the Prisoner of Azkaban,JK Rowling,2004,null,null,null
+Harry Potter and the Goblet of Fire,JK Rowling,2005,null,null,null
+Harry Potter and the Order of Phoenix,JK Rowling,2007,null,null,null
+Harry Potter and the Half-Blood Prince,JK Rowling,2009,null,null,null
+Harry Potter and the Deathly Hallows,JK Rowling,2010,null,null,null
+Geronimo Stilton,Mouse,2014,null,null,null
+Lord of the Rings,R.R Tolken,2002,null,null,null
+The Hobbit,R.R Tolken,2015,null,null,null
+My visit at the Zoo,Snowy,2019,null,null,null,120
+Jungle Safari Adventures,Emily Carter,2021,null,null,null,95
+Underwater Mysteries,David Reynolds,2020,null,null,null,110
+The Great Bird Migration,Sarah Watson,2018,null,null,null,80
+Life on the Savannah,Mark Thompson,2022,null,null,null,135
+Penguins in the Arctic,Lisa Chen,2019,null,null,null,90
+Reptiles and Amphibians,Roger Adams,2020,null,null,null,105
+The Wonders of Wildlife,Anna Smith,2023,null,null,null,140

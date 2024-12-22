@@ -46,8 +46,7 @@ public class Video extends Publication {
 		this.runtime = Duration.ofMinutes(runtime);
 	}
 	
-	public Video(BufferedReader br) {
-		
+	
 	
 	/** Saves the publication data to a file
 	 *

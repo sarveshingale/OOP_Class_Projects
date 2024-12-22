@@ -22,36 +22,7 @@ public class Library {
 		this.name = name;
 	}
 	
-	public Library(BufferedReader br) {
-		String strLine = line;
-		String[] lines;
-		lines = strLine.split(",");
-		String title = lines[0].trim();
-		String author = lines[1].trim();
-		int copyright = Integer.parseInt(lines[2].trim());
-		try {
-			LocalDate current = LocalDate.now();
-			int year = current.getYear();
-			
-			if(copyright < 1900 || copyright > year) {
-				throw new IllegalArgumentException("copyright year was either < 1900 or greater than current year");
-			}
-			
-		}
-		catch(IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}
-		
-		String loanedTo = lines[3].trim();
-		if(loanedTo.equals("null")) {
-			addPublication(new Publication(title, author, copyright));
-		}
-		else {
-			String patronName = lines[4].trim();
-			String patronEmail = lines[5].trim();
-			//loanedTo = new Patron(patronName, patronEmail);
-			addPublication(new Publication)
-		}
+	
 	/**
 	 * Adds a publication to the Library
 	 *
