@@ -56,6 +56,16 @@ public class LibraryManager {
 		}
 	}
 	
+	public void checkOutPub(Scanner sc) {
+		System.out.println("Which publication would you like to check out (Provide index): ");
+		int index = sc.nextInt();
+		sc.nextLine();
+		System.out.println("Who are you? ");
+		System.out.println(library.patronMenu());
+		int patronindex = sc.nextInt();
+		library.checkOut(index, patronindex);
+	}
+	
 	// MAIN METHOD
 	public static void main(String[] args) {
 	
@@ -80,13 +90,7 @@ public class LibraryManager {
 					lm.addPub(sc);
 				}
 				case 3 -> {
-					System.out.println("Which publication would you like to check out (Provide index): ");
-					int index = sc.nextInt();
-					sc.nextLine();
-					System.out.println("Who are you? ");
-					System.out.println(lm.library.patronMenu());
-					int patronindex = sc.nextInt();
-					lm.library.checkOut(index, patronindex);				
+					lm.checkOutPub(sc);			
 				}
 				case 4 -> {
 					System.out.println("Which publication would you like to check in (Provide index): ");
