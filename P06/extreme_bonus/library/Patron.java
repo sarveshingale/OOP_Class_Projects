@@ -24,8 +24,9 @@ public class Patron {
 		this.email = email;
 	}
 	
-	public Patron(BufferedReader br) {
-		
+	public Patron(BufferedReader br) throws IOException {
+		this.name = br.readLine();
+		this.email = br.readLine();
 	}
 	/** Saves the patron data to a file
 	 *

@@ -39,8 +39,36 @@ public class Publication {
 		}				
 	}
 	
-	public Publication(BufferedReader br) {
+	public Publication(BufferedReader br) throws IOException {
 		
+		this.title = br.readLine();
+		this.author = br.readLine();
+		int copyright = Integer.parseInt(br.readLine());
+		try {
+			LocalDate current = LocalDate.now();
+			int year = current.getYear();
+			
+			if(copyright < 1900 || copyright > year) {
+				throw new IllegalArgumentException("copyright year was either < 1900 or greater than current year");
+			}
+			
+			
+			this.copyright = copyright;
+		}
+		catch(IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		String patronName = br.readLine();
+		String patronEmail = br.readLine();
+		String localdate = br.readLine();
+		if(patronName.equals("null")) {
+			this.loanedTo = null;
+			this.dueDate = null;
+		}	
+		else {
+			this.loanedTo = new Patron(patronName, patronEmail);
+			this.dueDate = LocalDate.parse(localdate);
+		}
 	}
 		
 	
@@ -84,7 +112,7 @@ public class Publication {
 			bw.write(writeData);
 			loanedTo.save(bw);
 			String sdate = dueDate.toString();
-			bw.write(sdate);
+			bw.write("\n" + sdate);
 		}
 	
 	 }

@@ -46,8 +46,9 @@ public class Video extends Publication {
 		this.runtime = Duration.ofMinutes(runtime);
 	}
 	
-	public Video(BufferedReader br) {
+	public Video(BufferedReader br) throws IOException {
 		super(br);
+		this.runtime = Duration.ofMinutes(Integer.parseInt(br.readLine()));
 	}
 	
 	/** Saves the publication data to a file

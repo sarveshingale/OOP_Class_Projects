@@ -26,29 +26,25 @@ public class Library {
 	public Library(BufferedReader br) throws IOException {
 		this.name = br.readLine();
 		String line = "";
-		boolean isPub = true;
-		do {
+		
+		while(line != null) {
 			line = br.readLine();
-			if(line.equals("**Publications**")) {
-				isPub = true;
+			if(line == null) {
+				break;
 			}
-			if(line.equals("**Patrons**")) {
-				isPub = false;
+			if(line.equals("Publication")) {
+				addPublication(new Publication(br));
 			}
-			
-			if(isPub) {
-				String title = br.readLine();
-				if(title.equals("Video")) {
-					publications.add(new Video(br));
-				}
-				publications.add(new Publication(br));
+			else if(line.equals("Video")) {
+				addPublication(new Video(br));
 			}
-			else {
+			else if(line.equals("Patron")) {
 				addPatron(new Patron(br));
 			}
-			
+			else {
+				throw new IOException("#####Error -> Unexpected file formatting");
+			}
 		}
-		while(line != null);
 	}
 	
 	/**
@@ -136,7 +132,6 @@ public class Library {
 	 public void save(BufferedWriter bw) throws IOException {
 		
 		bw.write(name + "\n");
-		bw.write("**Publications**\n");
 		for(Publication publication : publications) {
 			if(publication instanceof Video) {
 				bw.write("Video\n");
@@ -148,8 +143,8 @@ public class Library {
 			bw.newLine();
 		}
 		
-		bw.write("**Patrons**\n");
 		for(Patron patron : patrons) {
+			bw.write("Patron\n");
 			patron.save(bw);
 			bw.newLine();
 		}
