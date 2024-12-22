@@ -39,44 +39,6 @@ public class Publication {
 		}				
 	}
 	
-	public Publication(BufferedReader br) {
-		String strLine = line;
-		String[] lines;
-		lines = strLine.split(",");
-		String title = lines[0].trim();
-		this.title = title;
-		String author = lines[1].trim();
-		this.author = author;
-		int copyright = Integer.parseInt(lines[2].trim());
-		
-		try {
-			LocalDate current = LocalDate.now();
-			int year = current.getYear();
-			
-			if(copyright < 1900 || copyright > year) {
-				throw new IllegalArgumentException("copyright year was either < 1900 or greater than current year");
-			}
-			
-			
-			this.copyright = copyright;
-		}
-		catch(IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}
-		
-		this.copyright = copyright;
-		String patronName = lines[3];
-		String patronEmail = lines[4];
-		String dueDate = lines[5];
-		if(patronName == "null") {
-			this.loanedTo = null;
-			this.dueDate = null;
-		}
-		else {
-			this.loanedTo = new Patron(patronName, patronEmail);
-			this.dueDate = LocalDate.parse(dueDate);
-		}
-	}
 		
 	
 	/**

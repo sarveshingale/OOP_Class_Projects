@@ -1,6 +1,7 @@
 package library;
 import java.time.Duration;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
 /**
  * This class models a Video
@@ -44,6 +45,9 @@ public class Video extends Publication {
 		}
 		this.runtime = Duration.ofMinutes(runtime);
 	}
+	
+	public Video(BufferedReader br) {
+		
 	
 	/** Saves the publication data to a file
 	 *

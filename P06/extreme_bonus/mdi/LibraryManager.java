@@ -20,6 +20,7 @@ public class LibraryManager {
 		Library library = new Library(libraryName);
 		
 		Scanner sc = new Scanner(System.in);
+	
 		int selection = 1;
 		while(selection != 0) {
 			System.out.println(libraryName + "\n\n");
