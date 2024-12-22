@@ -30,8 +30,8 @@ public class LibraryManager {
 			System.out.println("Patrons");
 			System.out.println("5) List\n" + "6) Add\n");
 			System.out.println("Files");
-			System.out.println("7) Load Test Data\n" + "8) Save\n" + "0) exit\n\n");
-			System.out.println("Selection: ");
+			System.out.println("7) Load Test Data\n" + "8) Save\n" + "9) Load\n" + "0) exit\n\n");
+			System.out.println("Selection: ");2
 			selection = sc.nextInt();
 			sc.nextLine();
 			switch(selection) {
@@ -185,6 +185,61 @@ public class LibraryManager {
 					
 				}
 				
+				case 9 -> {
+					System.out.print("Enter Publications File: ");
+					String inputPublication = sc.nextLine();
+					String inputPatron = sc.nextLine();
+					try(BufferedReader publicationFile = new BufferedReader(new FileReader(inputPublication))) {
+						String line;
+						while((line = publicationFile.readLine()) != null) {
+							
+							String strLine = line;
+							String[] lines;
+							lines = strLine.split(",");
+							if((lines.length != 3) && (lines.length !=4)) {
+								System.err.println("Lines in publication file formatted incorrectly");
+								continue;
+							}
+							
+							// Constructing Publication Object
+							if(lines.length == 3) {
+								try {
+									String title = lines[0].trim();
+									String author = lines[1].trim();
+									int copyright = Integer.parseInt(lines[2].trim());
+									library.addPublication(new Publication(title, author, copyright));
+								}
+								catch(IllegalArgumentException e) {
+									System.err.println(e.getMessage());
+									continue;
+								}
+							}
+							// Constructing Video Object
+							else if(lines.length == 4) {
+								try {
+									String title = lines[0].trim();
+									String author = lines[1].trim();
+									int copyright = Integer.parseInt(lines[2].trim());
+									int runtime = Integer.parseInt(lines[3].trim());
+									try {
+										library.addPublication(new Video(title, author, copyright, runtime));
+									}
+									catch(InvalidRuntimeException e) {
+										System.err.println(e.getMessage());
+									}
+								}
+								catch(IllegalArgumentException e) {
+									System.err.println(e.getMessage());
+									continue;
+								}
+							}
+							
+						}
+					}
+					catch(IOException e) {
+						System.err.println(e.getMessage());
+					}
+					
 				case 0 -> {}
 				default -> System.out.println("Invalid Selection");	
 			}
