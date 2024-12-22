@@ -66,6 +66,112 @@ public class LibraryManager {
 		library.checkOut(index, patronindex);
 	}
 	
+	public void checkInPub(Scanner sc) {
+		System.out.println("Which publication would you like to check in (Provide index): ");
+		int index = sc.nextInt();
+		sc.nextLine();
+		library.checkIn(index);
+	}
+	
+	public  void displayPatronMenu() {
+		System.out.println(library.patronMenu());
+	}
+	
+	public void addPatron(Scanner sc) {
+		System.out.println("Please enter your name");
+		String name = sc.nextLine();
+		System.out.println("Please enter your email");
+		String email = sc.nextLine();
+		Patron patron = new Patron(name, email);
+		library.addPatron(patron);
+	}
+	
+	public void populateTestData(Scanner sc) {
+	
+		// Populating publications from file
+		try(BufferedReader publicationFile = new BufferedReader(new FileReader("mdi/Publications.txt"))) {
+			String line;
+			while((line = publicationFile.readLine()) != null) {
+				
+				String strLine = line;
+				String[] lines;
+				lines = strLine.split(",");
+				if((lines.length != 3) && (lines.length !=4)) {
+					System.err.println("Lines in publication file formatted incorrectly");
+					continue;
+				}
+				
+				// Constructing Publication Object
+				if(lines.length == 3) {
+					try {
+						String title = lines[0].trim();
+						String author = lines[1].trim();
+						int copyright = Integer.parseInt(lines[2].trim());
+						library.addPublication(new Publication(title, author, copyright));
+					}
+					catch(IllegalArgumentException e) {
+						System.err.println(e.getMessage());
+						continue;
+					}
+				}
+				// Constructing Video Object
+				else if(lines.length == 4) {
+					try {
+						String title = lines[0].trim();
+						String author = lines[1].trim();
+						int copyright = Integer.parseInt(lines[2].trim());
+						int runtime = Integer.parseInt(lines[3].trim());
+						try {
+							library.addPublication(new Video(title, author, copyright, runtime));
+						}
+						catch(InvalidRuntimeException e) {
+							System.err.println(e.getMessage());
+						}
+					}
+					catch(IllegalArgumentException e) {
+						System.err.println(e.getMessage());
+						continue;
+					}
+				}
+				
+			}
+		}
+		catch(IOException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		// Populating Patrons from file		
+		try(BufferedReader patronFile = new BufferedReader(new FileReader("mdi/Patrons.txt"))) {
+			String line;
+			while((line = patronFile.readLine()) != null) {
+				
+				String strLine = line;
+				String[] lines;
+				lines = strLine.split(",");
+				if(lines.length != 2) {
+					System.err.println("Lines in Patrons file formatted incorrectly");
+					continue;
+				}
+				
+				// Constructing Publication Object	
+				try {
+					String name = lines[0].trim();
+					String email = lines[1].trim();
+					library.addPatron(new Patron(name, email));
+				}
+				catch(IllegalArgumentException e) {
+					System.err.println(e.getMessage());
+					continue;
+				}
+				
+			}
+		}
+		catch(IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+		
+	
 	// MAIN METHOD
 	public static void main(String[] args) {
 	
@@ -93,104 +199,18 @@ public class LibraryManager {
 					lm.checkOutPub(sc);			
 				}
 				case 4 -> {
-					System.out.println("Which publication would you like to check in (Provide index): ");
-					int index = sc.nextInt();
-					sc.nextLine();
-					lm.library.checkIn(index);
+					lm.checkInPub(sc);
 				}
 				case 5 -> {
-					System.out.println(lm.library.patronMenu());
+					lm.displayPatronMenu();
 				}
 				case 6 -> {
-					System.out.println("Please enter your name");
-					String name = sc.nextLine();
-					System.out.println("Please enter your email");
-					String email = sc.nextLine();
-					Patron patron = new Patron(name, email);
-					lm.library.addPatron(patron);
+					lm.addPatron(sc);
 				}
 				case 7 -> {
-					// Populating publications from file
-					try(BufferedReader publicationFile = new BufferedReader(new FileReader("mdi/Publications.txt"))) {
-						String line;
-						while((line = publicationFile.readLine()) != null) {
-							
-							String strLine = line;
-							String[] lines;
-							lines = strLine.split(",");
-							if((lines.length != 3) && (lines.length !=4)) {
-								System.err.println("Lines in publication file formatted incorrectly");
-								continue;
-							}
-							
-							// Constructing Publication Object
-							if(lines.length == 3) {
-								try {
-									String title = lines[0].trim();
-									String author = lines[1].trim();
-									int copyright = Integer.parseInt(lines[2].trim());
-									lm.library.addPublication(new Publication(title, author, copyright));
-								}
-								catch(IllegalArgumentException e) {
-									System.err.println(e.getMessage());
-									continue;
-								}
-							}
-							// Constructing Video Object
-							else if(lines.length == 4) {
-								try {
-									String title = lines[0].trim();
-									String author = lines[1].trim();
-									int copyright = Integer.parseInt(lines[2].trim());
-									int runtime = Integer.parseInt(lines[3].trim());
-									try {
-										lm.library.addPublication(new Video(title, author, copyright, runtime));
-									}
-									catch(InvalidRuntimeException e) {
-										System.err.println(e.getMessage());
-									}
-								}
-								catch(IllegalArgumentException e) {
-									System.err.println(e.getMessage());
-									continue;
-								}
-							}
-							
-						}
-					}
-					catch(IOException e) {
-						System.err.println(e.getMessage());
-					}
 					
-					// Populating Patrons from file		
-					try(BufferedReader patronFile = new BufferedReader(new FileReader("mdi/Patrons.txt"))) {
-						String line;
-						while((line = patronFile.readLine()) != null) {
-							
-							String strLine = line;
-							String[] lines;
-							lines = strLine.split(",");
-							if(lines.length != 2) {
-								System.err.println("Lines in Patrons file formatted incorrectly");
-								continue;
-							}
-							
-							// Constructing Publication Object	
-							try {
-								String name = lines[0].trim();
-								String email = lines[1].trim();
-								lm.library.addPatron(new Patron(name, email));
-							}
-							catch(IllegalArgumentException e) {
-								System.err.println(e.getMessage());
-								continue;
-							}
-							
-						}
-					}
-					catch(IOException e) {
-						System.err.println(e.getMessage());
-					}
+					lm.populateTestData(sc);
+					
 				}
 				
 				case 8 -> {
