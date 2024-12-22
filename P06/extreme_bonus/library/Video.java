@@ -46,14 +46,16 @@ public class Video extends Publication {
 		this.runtime = Duration.ofMinutes(runtime);
 	}
 	
-	
+	public Video(BufferedReader br) {
+		super(br);
+	}
 	
 	/** Saves the publication data to a file
 	 *
 	 * @param bw BufferedWriter to write to file
 	 * @version 1.0
 	 */
-	 public void save(BufferedWriter bw) throws IOException {	
+	 public void save(BufferedWriter bw) throws IOException {
 		super.save(bw);
 		String writeData = "\n" + runtime.toMinutes();
 		bw.write(writeData);

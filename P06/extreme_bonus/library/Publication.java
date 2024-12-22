@@ -39,6 +39,9 @@ public class Publication {
 		}				
 	}
 	
+	public Publication(BufferedReader br) {
+		
+	}
 		
 	
 	/**

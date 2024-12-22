@@ -187,8 +187,18 @@ public class LibraryManager {
 			System.err.println(e.getMessage());
 		}					
 	}
-		
 	
+	public void loadLibrary(Scanner sc) {
+		System.out.print("Please enter name of file you want to load from(+ extension): ");
+		String loadFile = sc.nextLine();
+		try(BufferedReader br = new BufferedReader(new FileReader(loadFile))) {
+			
+			library = new Library(br);
+		}
+		catch(IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 	// MAIN METHOD
 	public static void main(String[] args) {
 	
@@ -215,6 +225,7 @@ public class LibraryManager {
 				case 6 -> lm.addPatron(sc);
 				case 7 -> lm.populateTestData(sc);	
 				case 8 -> lm.saveLibrary(sc);
+				case 9 -> lm.loadLibrary(sc);
 				case 0 -> {}
 				default -> System.out.println("Invalid Selection");	
 			}

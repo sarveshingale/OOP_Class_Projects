@@ -1,6 +1,7 @@
 package library;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
 /**
  * This class models a library.
@@ -22,6 +23,33 @@ public class Library {
 		this.name = name;
 	}
 	
+	public Library(BufferedReader br) throws IOException {
+		this.name = br.readLine();
+		String line = "";
+		boolean isPub = true;
+		do {
+			line = br.readLine();
+			if(line.equals("**Publications**")) {
+				isPub = true;
+			}
+			if(line.equals("**Patrons**")) {
+				isPub = false;
+			}
+			
+			if(isPub) {
+				String title = br.readLine();
+				if(title.equals("Video")) {
+					publications.add(new Video(br));
+				}
+				publications.add(new Publication(br));
+			}
+			else {
+				addPatron(new Patron(br));
+			}
+			
+		}
+		while(line != null);
+	}
 	
 	/**
 	 * Adds a publication to the Library
@@ -107,13 +135,20 @@ public class Library {
 	 */
 	 public void save(BufferedWriter bw) throws IOException {
 		
-		bw.write("Publications\n");
+		bw.write(name + "\n");
+		bw.write("**Publications**\n");
 		for(Publication publication : publications) {
+			if(publication instanceof Video) {
+				bw.write("Video\n");
+			}
+			else {
+				bw.write("Publication\n");
+			}
 			publication.save(bw);
 			bw.newLine();
 		}
 		
-		bw.write("Patrons\n");
+		bw.write("**Patrons**\n");
 		for(Patron patron : patrons) {
 			patron.save(bw);
 			bw.newLine();

@@ -1,6 +1,7 @@
 package library;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
 /**
  * This class models a Patron
@@ -23,6 +24,9 @@ public class Patron {
 		this.email = email;
 	}
 	
+	public Patron(BufferedReader br) {
+		
+	}
 	/** Saves the patron data to a file
 	 *
 	 * @param bw BufferedWriter to write to file
