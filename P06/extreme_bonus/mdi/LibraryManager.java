@@ -36,6 +36,26 @@ public class LibraryManager {
 		System.out.println("Selection: ");
 	}
 	
+	public void addPub(Scanner sc) {
+		System.out.println("Enter Publication Title");
+		String title = sc.nextLine();
+		System.out.println("Enter Publication Author");
+		String author = sc.nextLine();
+		System.out.println("Enter copyright year");
+		int copyright = sc.nextInt();
+		sc.nextLine();
+		System.out.println("Enter Video Runtime (Press Enter for Book)");
+		String runtimes = sc.nextLine();
+		if(runtimes == "") {
+			library.addPublication(new Publication(title, author, copyright));
+		}
+		else {
+						
+			int runtime = Integer.parseInt(runtimes);
+			library.addPublication(new Video(title, author, copyright, runtime));
+		}
+	}
+	
 	// MAIN METHOD
 	public static void main(String[] args) {
 	
@@ -56,23 +76,8 @@ public class LibraryManager {
 				
 				case 1 -> System.out.println(lm.library);
 				case 2 -> {
-					System.out.println("Enter Publication Title");
-					String title = sc.nextLine();
-					System.out.println("Enter Publication Author");
-					String author = sc.nextLine();
-					System.out.println("Enter copyright year");
-					int copyright = sc.nextInt();
-					sc.nextLine();
-					System.out.println("Enter Video Runtime (Press Enter for Book)");
-					String runtimes = sc.nextLine();
-					if(runtimes == "") {
-						lm.library.addPublication(new Publication(title, author, copyright));
-					}
-					else {
-						
-						int runtime = Integer.parseInt(runtimes);
-						lm.library.addPublication(new Video(title, author, copyright, runtime));
-					}
+					
+					lm.addPub(sc);
 				}
 				case 3 -> {
 					System.out.println("Which publication would you like to check out (Provide index): ");
