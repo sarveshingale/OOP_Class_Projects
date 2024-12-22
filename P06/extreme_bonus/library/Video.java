@@ -55,7 +55,7 @@ public class Video extends Publication {
 	 */
 	 public void save(BufferedWriter bw) throws IOException {	
 		super.save(bw);
-		String writeData = "," + runtime.toMinutes();
+		String writeData = "\n" + runtime.toMinutes();
 		bw.write(writeData);
 	
 	 }

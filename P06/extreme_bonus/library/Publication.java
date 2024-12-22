@@ -72,15 +72,15 @@ public class Publication {
 	 */
 	 public void save(BufferedWriter bw) throws IOException {
 		
-		String writeData = title + "," + author + "," + copyright + ",";
+		String writeData = title + "\n" + author + "\n" + copyright + "\n";
 		if(loanedTo == null) {
-			writeData = writeData + "null," + "null" + "," + "null"; 
+			writeData = writeData + "null\n" + "null\n" + "null"; 
 			bw.write(writeData);
 		}
 		else {
 			bw.write(writeData);
 			loanedTo.save(bw);
-			String sdate = "," + dueDate.toString();
+			String sdate = dueDate.toString();
 			bw.write(sdate);
 		}
 	

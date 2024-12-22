@@ -30,7 +30,7 @@ public class Patron {
 	 */
 	 public void save(BufferedWriter bw) throws IOException{
 		 
-		 bw.write(name + "," + email);
+		 bw.write(name + "\n" + email);
 	 }
 	/**
 	 * Formats Patron's name and email

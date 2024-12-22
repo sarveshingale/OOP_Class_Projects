@@ -10,6 +10,7 @@ import library.Patron;
 import library.Library;
 import library.Video;
 import library.Video.InvalidRuntimeException;
+
 public class LibraryManager {
 	
 	private final static String pubFile = "Publication.txt";
@@ -170,6 +171,22 @@ public class LibraryManager {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	public void saveLibrary(Scanner sc) {
+		System.out.print("Please Enter Name of file for saving library(+ extension): ");
+		String libraryFile = sc.nextLine();
+		
+		try(
+			BufferedWriter bw = new BufferedWriter(new FileWriter(libraryFile));
+		)
+		{							
+			library.save(bw);
+			System.out.println("Saved Succesfully");
+		}
+		catch(IOException e) {
+			System.err.println(e.getMessage());
+		}					
+	}
 		
 	
 	// MAIN METHOD
@@ -191,48 +208,13 @@ public class LibraryManager {
 			switch(selection) {
 				
 				case 1 -> System.out.println(lm.library);
-				case 2 -> {
-					
-					lm.addPub(sc);
-				}
-				case 3 -> {
-					lm.checkOutPub(sc);			
-				}
-				case 4 -> {
-					lm.checkInPub(sc);
-				}
-				case 5 -> {
-					lm.displayPatronMenu();
-				}
-				case 6 -> {
-					lm.addPatron(sc);
-				}
-				case 7 -> {
-					
-					lm.populateTestData(sc);
-					
-				}
-				
-				case 8 -> {
-					System.out.print("Please Enter Name of file for saving publications(+ extension): ");
-					String publicationFile = sc.nextLine();
-					System.out.print("Please Enter Name of file for saving Patrons(+ extension): ");
-					String patronFile = sc.nextLine();
-					try(
-						BufferedWriter publicationWriter = new BufferedWriter(new FileWriter(publicationFile));
-						BufferedWriter patronWriter = new BufferedWriter(new FileWriter(patronFile));
-					)
-					{							
-						lm.library.save(publicationWriter, patronWriter);
-						System.out.println("Saved Succesfully");
-					}
-					catch(IOException e) {
-						System.err.println(e.getMessage());
-					}					
-					
-				}
-				
-					
+				case 2 -> lm.addPub(sc);
+				case 3 -> lm.checkOutPub(sc);			
+				case 4 -> lm.checkInPub(sc);
+				case 5 -> lm.displayPatronMenu();
+				case 6 -> lm.addPatron(sc);
+				case 7 -> lm.populateTestData(sc);	
+				case 8 -> lm.saveLibrary(sc);
 				case 0 -> {}
 				default -> System.out.println("Invalid Selection");	
 			}

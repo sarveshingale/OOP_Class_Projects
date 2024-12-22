@@ -105,16 +105,18 @@ public class Library {
 	 * @param patronWriter writing to patron file
 	 * @version 1.0
 	 */
-	 public void save(BufferedWriter publicationWriter, BufferedWriter patronWriter) throws IOException {
+	 public void save(BufferedWriter bw) throws IOException {
 		
+		bw.write("Publications\n");
 		for(Publication publication : publications) {
-			publication.save(publicationWriter);
-			publicationWriter.newLine();
+			publication.save(bw);
+			bw.newLine();
 		}
 		
+		bw.write("Patrons\n");
 		for(Patron patron : patrons) {
-			patron.save(patronWriter);
-			patronWriter.newLine();
+			patron.save(bw);
+			bw.newLine();
 		}
 	
 	 }
