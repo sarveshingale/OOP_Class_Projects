@@ -1,3 +1,8 @@
+// Copyright 2024 Sarvesh Milind Ingale <https://github.com/sarveshingale/LMS_OOP.git>
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// (at your option) any later version, see <https://www.gnu.org/licenses/>.
+
 package library;
 import java.time.Duration;
 import java.io.BufferedWriter;
@@ -46,6 +51,12 @@ public class Video extends Publication {
 		this.runtime = Duration.ofMinutes(runtime);
 	}
 	
+	/**
+	 * Instance a Video object
+	 *
+	 * @param br BufferedReader of file for data extraction
+	 * @version 1.0
+	 */
 	public Video(BufferedReader br) throws IOException {
 		super(br);
 		this.runtime = Duration.ofMinutes(Integer.parseInt(br.readLine()));

@@ -1,3 +1,8 @@
+// Copyright 2024 Sarvesh Milind Ingale <https://github.com/sarveshingale/LMS_OOP.git>
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// (at your option) any later version, see <https://www.gnu.org/licenses/>.
+
 package library;
 
 import java.io.BufferedWriter;
@@ -24,6 +29,12 @@ public class Patron {
 		this.email = email;
 	}
 	
+	/**
+	 * Instance a Patron object
+	 *
+	 * @param br BufferedReader of file for data extraction
+	 * @version 1.0
+	 */
 	public Patron(BufferedReader br) throws IOException {
 		this.name = br.readLine();
 		this.email = br.readLine();

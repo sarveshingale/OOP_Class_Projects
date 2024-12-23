@@ -1,3 +1,8 @@
+// Copyright 2024 Sarvesh Milind Ingale <https://github.com/sarveshingale/LMS_OOP.git>
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// (at your option) any later version, see <https://www.gnu.org/licenses/>.
+
 package library;
 import java.time.LocalDate;
 import java.io.BufferedWriter;
@@ -39,6 +44,12 @@ public class Publication {
 		}				
 	}
 	
+	/**
+	 * Instance a Publication object
+	 *
+	 * @param br BufferedReader of file for data extraction
+	 * @version 1.0
+	 */
 	public Publication(BufferedReader br) throws IOException {
 		
 		this.title = br.readLine();

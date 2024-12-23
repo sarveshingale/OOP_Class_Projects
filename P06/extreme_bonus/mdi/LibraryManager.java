@@ -1,3 +1,8 @@
+// Copyright 2024 Sarvesh Milind Ingale <https://github.com/sarveshingale/LMS_OOP.git>
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// (at your option) any later version, see <https://www.gnu.org/licenses/>.
+
 package mdi;
 import java.util.Scanner;
 import java.io.FileReader;
@@ -34,18 +39,18 @@ public class LibraryManager {
 		System.out.println("5) List\n" + "6) Add\n");
 		System.out.println("Files");
 		System.out.println("7) Load Test Data\n" + "8) Save\n" + "9) Load\n" + "0) exit\n\n");
-		System.out.println("Selection: ");
+		System.out.print("Selection: ");
 	}
 	
 	public void addPub(Scanner sc) {
-		System.out.println("Enter Publication Title");
+		System.out.print("Enter Publication Title: ");
 		String title = sc.nextLine();
-		System.out.println("Enter Publication Author");
+		System.out.print("Enter Publication Author: ");
 		String author = sc.nextLine();
-		System.out.println("Enter copyright year");
+		System.out.print("Enter copyright year: ");
 		int copyright = sc.nextInt();
 		sc.nextLine();
-		System.out.println("Enter Video Runtime (Press Enter for Book)");
+		System.out.print("Enter Video Runtime (Press Enter for Book): ");
 		String runtimes = sc.nextLine();
 		if(runtimes == "") {
 			library.addPublication(new Publication(title, author, copyright));
@@ -55,23 +60,26 @@ public class LibraryManager {
 			int runtime = Integer.parseInt(runtimes);
 			library.addPublication(new Video(title, author, copyright, runtime));
 		}
+		System.out.println("Publication Added Successfully\n");
 	}
 	
 	public void checkOutPub(Scanner sc) {
-		System.out.println("Which publication would you like to check out (Provide index): ");
+		System.out.print("Which publication would you like to check out (Provide index): ");
 		int index = sc.nextInt();
 		sc.nextLine();
-		System.out.println("Who are you? ");
+		System.out.println("Who are you?");
 		System.out.println(library.patronMenu());
 		int patronindex = sc.nextInt();
 		library.checkOut(index, patronindex);
+		System.out.println("Publication has been Checked Out\n");
 	}
 	
 	public void checkInPub(Scanner sc) {
-		System.out.println("Which publication would you like to check in (Provide index): ");
+		System.out.print("Which publication would you like to check in (Provide index): ");
 		int index = sc.nextInt();
 		sc.nextLine();
 		library.checkIn(index);
+		System.out.println("Publication has been Checked In\n");
 	}
 	
 	public  void displayPatronMenu() {
@@ -79,12 +87,13 @@ public class LibraryManager {
 	}
 	
 	public void addPatron(Scanner sc) {
-		System.out.println("Please enter your name");
+		System.out.print("Please enter your name: ");
 		String name = sc.nextLine();
-		System.out.println("Please enter your email");
+		System.out.print("Please enter your email: ");
 		String email = sc.nextLine();
 		Patron patron = new Patron(name, email);
 		library.addPatron(patron);
+		System.out.println("Patron has been Added\n");
 	}
 	
 	public void populateTestData(Scanner sc) {
@@ -181,7 +190,7 @@ public class LibraryManager {
 		)
 		{							
 			library.save(bw);
-			System.out.println("Saved Succesfully");
+			System.out.println("Saved Succesfully\n");
 		}
 		catch(IOException e) {
 			System.err.println(e.getMessage());
@@ -194,11 +203,13 @@ public class LibraryManager {
 		try(BufferedReader br = new BufferedReader(new FileReader(loadFile))) {
 			
 			library = new Library(br);
+			System.out.println("Library Loaded Successfully\n");
 		}
 		catch(IOException e) {
 			System.err.println(e.getMessage());
 		}
 	}
+	
 	// MAIN METHOD
 	public static void main(String[] args) {
 	
@@ -215,6 +226,8 @@ public class LibraryManager {
 			
 			selection = sc.nextInt();
 			sc.nextLine();
+			System.out.println();
+			
 			switch(selection) {
 				
 				case 1 -> System.out.println(lm.library);
