@@ -168,4 +168,4 @@ public class WordSearch {
     private SortedSet<Solution> solutions = new TreeSet<>();
 }
 
-// time java WordSearch -v 1 2000 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
+// time java WordSearch 1 2000 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
