@@ -117,22 +117,29 @@ public class WordSearch {
 					System.err.println(e.getMessage());
 				}
 			
-		}
-			
-			
+		}			
 			//solve(0, 0, NUM_PUZZLES);
     }
 
     public void solve(int threadID, int firstPuzzle, int lastPuzzlePlusOne) {
         System.err.println("Thread " + threadID + ": " + firstPuzzle + "-" + (lastPuzzlePlusOne-1));
         for(int i=firstPuzzle; i<lastPuzzlePlusOne; ++i) {
-            Puzzle p = puzzles.get(i);
+			Puzzle p = null;
+			synchronized(lock) {
+				p = puzzles.get(i);
+			}
             Solver solver = new Solver(p);
             for(String word : p.getWords()) {
                 try {
-                    Solution s = solver.solve(word);
+					
+					Solution s = solver.solve(word);
+					
                     if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
-                    else solutions.add(s);
+                    else {
+						synchronized(lock) {
+							solutions.add(s);
+						}
+					}
                 } catch (Exception e) {
                     System.err.println("#### Exception solving " + p.name() 
                         + " for " + word + ": " + e.getMessage());
@@ -155,9 +162,10 @@ public class WordSearch {
     public final int NUM_THREADS;
     public final int NUM_PUZZLES;
     public final boolean verbose;
-
+	
+	private static Object lock = new Object();
     private List<Puzzle> puzzles = new ArrayList<>();;
     private SortedSet<Solution> solutions = new TreeSet<>();
 }
 
-// time java WordSearch 1 2500 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
+// time java WordSearch -v 1 2000 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
