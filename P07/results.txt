@@ -308,6 +308,101 @@ QUESTION 5: Time your thread pool version of WordSearch exactly as you did for t
 
 YOUR Timing:
 
+2000 puzzles with 1 threads
+
+real    0m31.836s
+user    0m32.363s
+sys     0m0.282s
+
+2000 puzzles with 2 threads
+
+real    0m22.955s
+user    0m45.947s
+sys     0m0.351s
+
+2000 puzzles with 3 threads
+
+real    0m18.865s
+user    0m55.827s
+sys     0m0.533s
+
+2000 puzzles with 4 threads
+
+real    0m15.863s
+user    1m2.684s
+sys     0m0.533s
+
+2000 puzzles with 5 threads
+
+real    0m15.070s
+user    1m13.500s
+sys     0m0.628s
+
+2000 puzzles with 6 threads
+
+real    0m14.127s
+user    1m23.018s
+sys     0m0.511s
+
+2000 puzzles with 7 threads
+
+real    0m14.523s
+user    1m38.420s
+sys     0m0.724s
+
+2000 puzzles with 8 threads
+
+real    0m12.605s
+user    1m37.697s
+sys     0m0.784s
+
+2000 puzzles with 9 threads
+
+real    0m13.112s
+user    1m53.867s
+sys     0m0.956s
+
+2000 puzzles with 10 threads
+
+real    0m12.703s
+user    2m1.888s
+sys     0m0.897s
+
+2000 puzzles with 11 threads
+
+real    0m10.982s
+user    1m55.399s
+sys     0m1.099s
+
+2000 puzzles with 12 threads
+
+real    0m10.172s
+user    1m54.180s
+sys     0m1.048s
+
+2000 puzzles with 13 threads
+
+real    0m10.261s
+user    1m53.508s
+sys     0m1.114s
+
+2000 puzzles with 14 threads
+
+real    0m10.828s
+user    2m0.360s
+sys     0m1.181s
+
+2000 puzzles with 15 threads
+
+real    0m11.377s
+user    2m3.907s
+sys     0m1.766s
+
+2000 puzzles with 16 threads
+
+real    0m11.607s
+user    2m8.450s
+sys     0m1.109s
 
 
 
@@ -316,18 +411,8 @@ YOUR Timing:
 
 QUESTION 6: Is a thread pool faster, slower, or roughly equivalent in performance? 
 
-
-
-
-
-
-
-QUESTION 7: Compare your full credit and bonus solution code. Which do you believe is more supportable over a long lifetime of evolving hardware and environments?
-
-
-
-
-
+Using a thread pool for this application proved to be roughly equivalent in performance with the lowest computation time as well as mean times corresponding with those of 
+simple threads.
 
 
 EXTREME BONUS
