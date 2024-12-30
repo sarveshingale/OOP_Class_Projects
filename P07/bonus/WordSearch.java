@@ -79,73 +79,61 @@ public class WordSearch {
         System.err.println ("\n" + NUM_PUZZLES + " puzzles with " 
             + NUM_THREADS + " threads"); // Show the # puzzles and threads
         // Solve all puzzles
-		int effectiveNumThreads = 0;
-		int split = 0;
-		int end = 0;
-		int lastStart = 0;
-		int rem = 0;
-		if(NUM_PUZZLES <= NUM_THREADS) {
-			split = 1;
-			effectiveNumThreads = NUM_PUZZLES;
-		}
-		else {
-			split = NUM_PUZZLES / NUM_THREADS;
-			rem = NUM_PUZZLES % NUM_THREADS; // till i = rem - 1 you do split + 1
-			effectiveNumThreads = NUM_THREADS;
-		}
+		Thread[] threads = new Thread[NUM_THREADS];
 		
-		Thread[] threads = new Thread[effectiveNumThreads];
-		for(int i = 0; i < effectiveNumThreads; i++) {
-						
-			final int firstPuzzle = lastStart;
-			end = (i < rem) ? (lastStart + split + 1) : (lastStart + split);
-			final int lastPuzzlePlusOne = end;
+		// Create thread pool
+		for(int i = 0; i < NUM_THREADS; i++) {
 			final int threadID = i;
-			
-			Thread thread = new Thread(() -> solve(threadID, firstPuzzle, lastPuzzlePlusOne));
-			threads[i] = thread;
+			threads[i] = new Thread(() -> {
+			int puzzleID = -1;
+			while((puzzleID = getPuzzleID()) != -1) {
+				solve(threadID, puzzleID);
+			}});
 			threads[i].start();
-			lastStart = lastPuzzlePlusOne;
 		}
-		
-		for(int i = 0; i < effectiveNumThreads; i++) {
+		for(int i = 0; i < NUM_THREADS; i++) {
 			
-				try {
-					threads[i].join();
-				}
-				catch(InterruptedException e) {
-					System.err.println(e.getMessage());
-				}
-			
-		}			
+			try{
+				threads[i].join();
+			}
+			catch(InterruptedException e) {
+				System.err.println(e.getMessage());
+			}
+		}
 			//solve(0, 0, NUM_PUZZLES);
     }
-
-    public void solve(int threadID, int firstPuzzle, int lastPuzzlePlusOne) {
-        System.err.println("Thread " + threadID + ": " + firstPuzzle + "-" + (lastPuzzlePlusOne-1));
-        for(int i=firstPuzzle; i<lastPuzzlePlusOne; ++i) {
-			Puzzle p = null;
-			synchronized(lock) {
-				p = puzzles.get(i);
-			}
-            Solver solver = new Solver(p);
-            for(String word : p.getWords()) {
-                try {
-					
-					Solution s = solver.solve(word);
-					
-                    if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
-                    else {
-						synchronized(lock) {
-							solutions.add(s);
-						}
+	
+	private synchronized int getPuzzleID() {
+		if(currPuzzID >= NUM_PUZZLES) {
+			return -1;
+		}
+		else {
+			return currPuzzID++;
+		}
+	}
+	
+    public void solve(int threadID, int puzzleID) {
+        //System.err.println("Thread " + threadID + ": " + firstPuzzle + "-" + (lastPuzzlePlusOne-1));
+        
+		Puzzle p = puzzles.get(puzzleID);
+		Solver solver = new Solver(p);
+		for(String word : p.getWords()) {
+			try {
+				
+				Solution s = solver.solve(word);
+				
+				if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
+				else {
+					synchronized(lock) {
+						solutions.add(s);
 					}
-                } catch (Exception e) {
-                    System.err.println("#### Exception solving " + p.name() 
-                        + " for " + word + ": " + e.getMessage());
-                }
-            }
-        }
+				}
+			} catch (Exception e) {
+				System.err.println("#### Exception solving " + p.name() 
+					+ " for " + word + ": " + e.getMessage());
+			}
+		}
+        
         
         // -------- All Puzzles Solved --------
     }
@@ -166,6 +154,7 @@ public class WordSearch {
 	private static Object lock = new Object();
     private List<Puzzle> puzzles = new ArrayList<>();;
     private SortedSet<Solution> solutions = new TreeSet<>();
+	private int currPuzzID = 0;
 }
 
 // time java WordSearch 1 2000 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
