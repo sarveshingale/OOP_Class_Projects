@@ -79,7 +79,48 @@ public class WordSearch {
         System.err.println ("\n" + NUM_PUZZLES + " puzzles with " 
             + NUM_THREADS + " threads"); // Show the # puzzles and threads
         // Solve all puzzles
-        solve(0, 0, NUM_PUZZLES);
+		int effectiveNumThreads = 0;
+		int split = 0;
+		int end = 0;
+		int lastStart = 0;
+		int rem = 0;
+		if(NUM_PUZZLES <= NUM_THREADS) {
+			split = 1;
+			effectiveNumThreads = NUM_PUZZLES;
+		}
+		else {
+			split = NUM_PUZZLES / NUM_THREADS;
+			rem = NUM_PUZZLES % NUM_THREADS; // till i = rem - 1 you do split + 1
+			effectiveNumThreads = NUM_THREADS;
+		}
+		
+		Thread[] threads = new Thread[effectiveNumThreads];
+		for(int i = 0; i < effectiveNumThreads; i++) {
+						
+			final int firstPuzzle = lastStart;
+			end = (i < rem) ? (lastStart + split + 1) : (lastStart + split);
+			final int lastPuzzlePlusOne = end;
+			final int threadID = i;
+			
+			Thread thread = new Thread(() -> solve(threadID, firstPuzzle, lastPuzzlePlusOne));
+			threads[i] = thread;
+			threads[i].start();
+			lastStart = lastPuzzlePlusOne;
+		}
+		
+		for(int i = 0; i < effectiveNumThreads; i++) {
+			
+				try {
+					threads[i].join();
+				}
+				catch(InterruptedException e) {
+					System.err.println(e.getMessage());
+				}
+			
+		}
+			
+			
+			//solve(0, 0, NUM_PUZZLES);
     }
 
     public void solve(int threadID, int firstPuzzle, int lastPuzzlePlusOne) {
@@ -118,3 +159,5 @@ public class WordSearch {
     private List<Puzzle> puzzles = new ArrayList<>();;
     private SortedSet<Solution> solutions = new TreeSet<>();
 }
+
+// time java WordSearch 1 2500 ../puzzle??.txt (To get between 30-45 seconds runtime on my machine)
