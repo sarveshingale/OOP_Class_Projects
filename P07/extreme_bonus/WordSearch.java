@@ -152,7 +152,7 @@ public class WordSearch {
     public final boolean verbose;
 	
 	private static Object lock = new Object();
-    private List<Puzzle> puzzles = new ArrayList<>();;
+    private List<Puzzle> puzzles = new ArrayList<>();
     private SortedSet<Solution> solutions = new TreeSet<>();
 	private int currPuzzID = 0;
 }
