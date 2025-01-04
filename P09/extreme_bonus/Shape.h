@@ -9,6 +9,7 @@ class Shape {
 		virtual std::string name() = 0;
 		virtual double area() = 0;
 		std::string to_string();
+		virtual void display_image() = 0;
 };
 
 #endif

@@ -10,6 +10,7 @@ class Circle : public Shape {
 		Circle(double radius);
 		std::string name() override;
 		double area() override;
+		void display_image() override;
 		
 	private:
 		double _radius;

@@ -14,5 +14,6 @@ int main() {
 		std::cout << shape -> name() << std::endl;
 	}
 	
+	shapes -> at(0) -> display_image();
 	return 0;
 }

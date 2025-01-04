@@ -9,6 +9,7 @@ class Rectangle : public Shape {
 		Rectangle(double height, double width);
 		std::string name() override;
 		double area() override;
+		void display_image() override;
 		
 	private:
 		double _height;
