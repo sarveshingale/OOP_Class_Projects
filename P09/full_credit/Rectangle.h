@@ -1,12 +1,14 @@
 #ifndef __RECTANGLE_H
 #define __RECTANGLE_H
 
-class Rectangle {
+#include "Shape.h"
+
+class Rectangle : public Shape {
 	
 	public:
 		Rectangle(double height, double width);
-		std::string name();
-		double area();
+		std::string name() override;
+		double area() override;
 		
 	private:
 		double _height;
