@@ -1,6 +1,8 @@
 #ifndef __TIME_H
 #define __TIME_H
 
+#include <iostream>
+
 class Time {
 	
 	public:
@@ -8,22 +10,22 @@ class Time {
 		Time operator+(Time time);
 		Time& operator++();
 		Time operator++(int value);
-		bool operator==(Time& time);
-		bool operator!=(Time& time);
-		bool operator>(Time& time);
-		bool operator<(Time& time);
-		bool operator<=(Time& time);
-		bool operator>=(Time& time);
+		inline bool operator==(Time& time) {return compare()};
+		inline bool operator!=(Time& time) {return compare()};
+		inline bool operator>(Time& time) {return compare()};
+		inline bool operator<(Time& time) {return compare()};
+		inline bool operator<=(Time& time) {return compare()};
+		inline bool operator>=(Time& time) {return compare()};
 		friend std::ostream& operator<<(ostream& ostream, Time& time);
 		friend std::istream& operator>>(istream& istream, Time& time);
 		
 	
-	private:
-		
+	private:		
 		int _hour;
 		int _minute;
 		int _second;
 		int compare(Time time);
 		void rationalize();
 };
+
 #endif
