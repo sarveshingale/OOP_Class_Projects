@@ -48,14 +48,14 @@ int main(int argc, char* argv[]) {
     for(int i=1; i<argc; ++i) // add command line arguments for testing
         times.push_back(std::string{argv[i]});
     
-	/*
+	
     Time time; // convert each vector element to Time and back to test operator>>
     for(std::string expected : times) {
         std::istringstream iss{expected};
         iss >> time;
         if(fails(time, expected)) result |= vector;
     }
-	*/
+	
 	
     // -------------------------------------------------------------------------
     vector <<= 1;   // Rationalize
