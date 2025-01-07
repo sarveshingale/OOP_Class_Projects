@@ -7,6 +7,9 @@ Time::Time(int hour, int minute, int second)
 		rationalize();
 }
 
+Time::Time()
+	: Time{0,0,0} {};
+
 std::ostream&  operator<<(std::ostream& ostream, const Time& time) {
 	ostream << std::setfill('0') << std::setw(2) << time._hour << ':';
 	ostream << std::setfill('0') << std::setw(2) << time._minute << ':';

@@ -6,7 +6,8 @@
 class Time {
 	
 	public:
-		Time(int hour = 0, int minute = 0, int second = 0);
+		Time(int hour, int minute, int second);
+		Time();
 		Time operator+(Time time);
 		Time operator+(int seconds) const;
 		friend Time operator+(int seconds, const Time& time);
