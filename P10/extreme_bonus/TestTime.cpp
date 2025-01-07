@@ -73,10 +73,11 @@ int main(int argc, char* argv[]) {
     vector <<= 1;   // Increment
     if(fails(++Time{12, 30, 59}, "12:31:00")) result |= vector;
     if(fails(Time{12, 30, 59}++, "12:30:59")) result |= vector;
+	// Added tests for mixed increment operator
     if(fails(++Time{23, 59, 59}, "00:00:00")) result |= vector;
     if(fails(++Time{ 0,  0,  0}, "00:00:01")) result |= vector;
 	
-	// Test for operator[]
+	// Regression Test for operator[]
 	Time time1{12,13,14};
 	int checker = 12;
 	for(int i = 0; i < 3; i++) {
