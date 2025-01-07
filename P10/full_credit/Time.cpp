@@ -64,6 +64,7 @@ void Time::rationalize() {
 	}
 	if(_second < 0) {
 		int sub_minutes = ceil(_second / 60);
+		if(sub_minutes == 0) {sub_minutes++;}; // Need to subtract atleast 1 minute
 		_second = 60 + (_second % 60);
 		
 		// Changing 60 to 0 because we did ceil
@@ -80,6 +81,7 @@ void Time::rationalize() {
 	}
 	if(_minute < 0) {
 		int sub_hours = ceil(_minute / 60);
+		if(sub_hours == 0) {sub_hours++;}; // Need to subtract atleast an hour
 		_minute = 60 + (_minute % 60);
 		
 		// Changin 60 to 0 because we did ceil
