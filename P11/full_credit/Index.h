@@ -13,6 +13,6 @@ class Index {
 		typedef std::string Word;
 		typedef std::set<Location> Locations;
 		std::map<Word, Locations> _index;
-}
+};
 
 #endif		
