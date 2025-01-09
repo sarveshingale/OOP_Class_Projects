@@ -1,15 +1,20 @@
+#ifndef __LOCATION_H
+#define __LOCATION_H
+
 #include <iostream>
 
 class Location {
 	
 	public:
 		Location(std::string filename, int line);
-		inline bool operator==(Location& location) const {compare()};
-		inline bool operator!=(Location& location) const {compare()};
-		inline bool operator>=(Location& location) const {compare()};
-		inline bool operator<=(Location& location) const {compare()};
-		inline bool operator>(Location& location) const {compare()};
-		inline bool operator<(Location& location) const {compare()};
+		
+		// First ordered by filename and then ordered by line #
+		inline bool operator==(Location& location) const {return compare() == 0};
+		inline bool operator!=(Location& location) const {return compare() != 0};
+		inline bool operator>=(Location& location) const {return (compare() == 1 || compare() == 0)};
+		inline bool operator<=(Location& location) const {return (compare() == -1 || compare() == 0)};
+		inline bool operator>(Location& location) const {return compare() == 1};
+		inline bool operator<(Location& location) const {return compare() == -1};
 		friend ostream& operator<<(ostream& ost, Location& location);
 		
 	private:
@@ -17,3 +22,5 @@ class Location {
 		int _line;
 		int compare(Location& location);
 }
+
+#endif

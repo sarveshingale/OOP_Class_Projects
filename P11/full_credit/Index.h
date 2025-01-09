@@ -1,3 +1,6 @@
+#ifndef __INDEX_H
+#define __INDEX_H
+
 #include <iostream>
 
 class Index {
@@ -11,5 +14,5 @@ class Index {
 		typedef std::set<Location> Locations;
 		std::map<Word, Locations> _index;
 }
-		
-		
+
+#endif		
