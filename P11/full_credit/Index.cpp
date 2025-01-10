@@ -24,8 +24,11 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
 		ost << key << ": ";
 		
 		std::set<Location>::iterator it;
+		std::string separator;
 		for(it = value_set.begin(); it != value_set.end(); it++) {
-			ost << *it;
+			
+			ost << separator << *it;
+			separator = ", ";
 		}
 		/*
 		for(auto& value : value_set) {
