@@ -22,6 +22,7 @@ class Location {
 		std::string _filename;
 		int _line;
 		int compare(const Location& location) const;
+		
 };
 
 #endif

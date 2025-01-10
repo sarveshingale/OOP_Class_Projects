@@ -4,7 +4,7 @@
 #include "cctype"
 
 int main(int argc, char* rgv[]) {
-	
+	/*
 	std::vector<std::ifstream> ifts{};
 	std::vector<std::string> words{};
 	for(int i = 1; i < argc; i++) {
@@ -19,7 +19,7 @@ int main(int argc, char* rgv[]) {
 		}
 		
 		
-	}
+	}*/
 	
 		
 	return 0;

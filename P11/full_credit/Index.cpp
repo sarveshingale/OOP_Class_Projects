@@ -23,6 +23,8 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
 	for(auto& [key, value_set] : index._index) {
 		ost << key << ": ";
 		// CHANGE TO USING ITERATOR
+		value::iterator it;
+		for(it.begin();
 		for(auto& value : value_set) {
 			ost << value;
 		}
@@ -30,4 +32,3 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
 	}
 	return ost;
 }
-		
