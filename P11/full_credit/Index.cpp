@@ -17,4 +17,16 @@ void Index::add_word(Word word, std::string filename, int line) {
 		 _index[word].insert(Location{filename, line});
 	}
 }
+
+std::ostream& operator<<(std::ostream& ost, const Index& index) {
+	
+	for(auto& [key, value_set] : index._index) {
+		ost << key << ": ";
+		for(auto& value : value_set) {
+			ost << value;
+		}
+		ost << std::endl;
+	}
+	return ost;
+}
 		

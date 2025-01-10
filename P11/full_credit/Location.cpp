@@ -12,7 +12,7 @@ int Location::compare(const Location& location) const {
 	else {return 0;}
 }
 
-std::ostream& operator<<(std::ostream& ost, Location& location) {
+std::ostream& operator<<(std::ostream& ost, const Location& location) {
 	ost << location._filename << " line " << location._line;
 	return ost;
 }

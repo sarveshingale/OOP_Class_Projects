@@ -14,7 +14,7 @@ class Index {
 	
 	public:
 		void add_word(Word word, std::string filename, int line);
-		friend std::ostream& operator<<(std::ostream& ost, Index& index);
+		friend std::ostream& operator<<(std::ostream& ost, const Index& index);
 	
 	private:
 		std::map<Word, Locations> _index;

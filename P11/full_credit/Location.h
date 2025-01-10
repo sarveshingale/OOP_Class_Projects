@@ -16,7 +16,7 @@ class Location {
 		inline bool operator<=(const Location& location) const {return (compare(location) == -1 || compare(location) == 0);};
 		inline bool operator>(const Location& location) const {return compare(location) == 1;};
 		inline bool operator<(const Location& location) const {return compare(location) == -1;};
-		friend std::ostream& operator<<(std::ostream& ost, Location& location);
+		friend std::ostream& operator<<(std::ostream& ost, const Location& location);
 		
 	private:
 		std::string _filename;
