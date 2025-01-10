@@ -1,5 +1,7 @@
 #include "Location.h"
 
+std::string Location::last_filename; // static field
+
 Location::Location(std::string filename, int line)
 	: _filename{filename}, _line{line} {}
 
@@ -13,6 +15,13 @@ int Location::compare(const Location& location) const {
 }
 
 std::ostream& operator<<(std::ostream& ost, const Location& location) {
-	ost << location._filename << " line " << location._line;
+	
+	if(location._filename != Location::last_filename) {
+		ost << location._filename << " line " << location._line;
+	}
+	else {
+		ost << location._line;
+	}
+	Location::last_filename = location._filename;
 	return ost;
 }

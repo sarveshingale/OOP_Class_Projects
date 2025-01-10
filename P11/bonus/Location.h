@@ -9,6 +9,9 @@ class Location {
 	public:
 		Location(std::string filename, int line);
 		
+		static void next_word() {
+			last_filename = "";
+		}
 		// First ordered by filename and then ordered by line #
 		inline bool operator==(const Location& location) const {return compare(location) == 0;};
 		inline bool operator!=(const Location& location) const {return compare(location) != 0;};
@@ -20,6 +23,7 @@ class Location {
 		
 	private:
 		std::string _filename;
+		static std::string last_filename;
 		int _line;
 		int compare(const Location& location) const;
 		

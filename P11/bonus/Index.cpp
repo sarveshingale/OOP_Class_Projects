@@ -22,18 +22,14 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
 	
 	for(auto& [key, value_set] : index._index) {
 		ost << key << ": ";
-		
+		Location::next_word();
 		std::set<Location>::iterator it;
 		std::string separator;
 		for(it = value_set.begin(); it != value_set.end(); it++) {
-			
 			ost << separator << *it;
 			separator = ", ";
 		}
-		/*
-		for(auto& value : value_set) {
-			ost << value;
-		}*/
+		
 		ost << std::endl;
 	}
 	return ost;
