@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
 	
 	for(auto& [key, value_set] : index._index) {
 		ost << key << ": ";
-		// CHANGE TO USING ITERATOR
+		
 		std::set<Location>::iterator it;
 		for(it = value_set.begin(); it != value_set.end(); it++) {
 			ost << *it;

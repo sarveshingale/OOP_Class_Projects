@@ -1,27 +1,41 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "Index.h"
-#include "cctype"
 
-int main(int argc, char* rgv[]) {
-	/*
-	std::vector<std::ifstream> ifts{};
-	std::vector<std::string> words{};
+int main(int argc, char* argv[]) {
+	
+	
+	std::vector<std::string> words{}; // Stores a line in the file
+	Index index{};
 	for(int i = 1; i < argc; i++) {
-		ifts.add{std::ifstream{argv[i]}};
-		if(!ifts[i]) { throw std::runtime_error{"Cant open input file: " + argv[i]};}
+		std::ifstream ifts{argv[i]};
+		try {
+			if(!ifts) { 
+				throw std::runtime_error{"Cant open input file: " + std::string{argv[i]}};
+			}
+		}
 		catch(const std::exception& e) {
 			std::cerr << e.what() << std::endl;
 			continue;
 		}
-		std::getline(ifts[i], words, ' ');
-		for(auto& word : words) {
-			
+		int line = 1;
+		while(ifts) {
+			std::getline(ifts, words, ' ');
+			for(auto& word : words) {
+				for(auto& c : word) {
+					if(!isalpha(c)) {
+						c = ' ';
+					}
+					if(isupper(c)) {
+						c = tolower(c);
+					}
+				}
+				index.add_word(word, argv[i], line);
+			}
+			line++;
 		}
-		
-		
-	}*/
-	
-		
+	}
+			
 	return 0;
 }
